@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuário</title>
+  <style>
+    h1 {
+
+      font-family: 'Arial', sans-serif;
+      color: #ffffff;
+     
+      background: linear-gradient(90deg, rgba(44, 42, 66, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(152, 59, 227, 1) 100%);
+      /* Roxo vibrante */
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      /* Sombra para destacar */
+      font-size: 25px;
+      /* Aumentar o tamanho */
+      text-align: center;
+      /* Centralizar o texto */
+      letter-spacing: 2px;
+      /* Espaçamento entre as letras */
+
+      /* Deixar o texto transparente para o gradiente aparecer */
+      padding: 20px;
+      border-radius: 10px;
+      /* Arredondar os cantos */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      /* Sombra do título */
+    }
+
+    body {
+      background-color: rgb(255, 255, 255);
+    }
+
+    #scList {
+      font-family: 'Arial', sans-serif;
+      color: #8A2BE2;
+      /* Roxo vibrante */
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      /* Sombra para destacar */
+      font-size: 25px;
+      /* Aumentar o tamanho */
+      letter-spacing: 2px;
+      /* Espaçamento entre as letras */
+      color: #6b6190;
+      /* Cor do texto */
+      padding: 20px;
+      border-radius: 10px;
+      /* Arredondar os cantos */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      /* Sombra do título */
+
+      /* Centralização do conteúdo */
+    
+
+    }
+
+    #scRegister {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      border: 1px solid #ffffff;
+      border-radius: 8px;
+      width: 300px;
+      color: #432e80;
+      box-shadow: 0 4px 4px 4px rgba(0, 0, 0, 0.2);
+      background: rgb(255, 255, 255);
+
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      color: rgb(255, 255, 255);
+      border-radius: 4px;
+      border-color: #ffffff;
+      cursor: pointer;
+      overflow: hidden;
+      display: block;
+      background: rgb(44, 42, 66);
+      background: linear-gradient(90deg, rgba(44, 42, 66, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(152, 59, 227, 1) 100%);
+    }
+  
+
+    .row {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+
+    }
+
+    label{
+      font-weight: 500;
+    }
+    br{
+      margin: 10px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+
+  <h1>Acesso a biblioteca</h1>
+  <div class="row">
+    <section id="scRegister">
+      <form>
+        <label>Nome:</label><br>
+        <input type="text" id="userName" /><br>
+
+        <label>Senha:</label><br>
+        <input type="password" id="userPassword" /><br>
+
+        <label>CPF:</label><br>
+        <input type="text" id="userCPF" /><br>
+
+        <label>Idade:</label><br>
+        <input type="number" id="userAge" /><br>
+
+        <label>Phone:</label><br>
+        <input type="text" id="userPhone" /><br>
+
+        <label>Email:</label><br>
+        <input type="email" id="userEmail" /><br>
+
+        <label>Endereço:</label><br>
+        <input type="text" id="userAddress" /><br>
+        <br>
+        <button type="button" id="register" onclick="handleRegister()">Cadastrar</button>
+      </form>
+      <hr>
+    </section>
+
+    <section id="scList">
+      <table>
+        <thead>
+          <th>Nomes cadastrados</th>
+       
+
+        </thead>
+
+        <tbody>
+
+
+        </tbody>
+
+
+      </table>
+     
+
+    </section>
+
+  </div>
+  <!-- FUNÇÃO READ OU GET-->
+
+</body>
+
+<script>
+
+  var users = []
+  //Criando o objeto User
+  function setUser(req) {
+    const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+    const phoneRegex = /^\(\d{2}\)\d{5}-\d{4}$/;
+    const Dataregex = /^(?:(?:19|20)\d{2})-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!cpfRegex.test(req.cpf)) {
+      return "O formato do CPF está incorreto. Use o formato: XXX.XXX.XXX-XX";
+    }
+
+    // Verificar telefone
+    if (!phoneRegex.test(req.phone)) {
+      return "O formato do telefone está incorreto. Use o formato: (XX)XXXXX-XXXX";
+    }
+    //(31)12345-6789
+
+    // Verificar data
+    if (!Dataregex.test(req.createAT)) {
+      return "O formato da data está incorreto. Use o formato: YYYY-MM-DD";
+    }
+
+    // Verificar e-mail
+    if (!emailRegex.test(req.email)) {
+      return "O formato do e-mail está incorreto. Use o formato: example@domain.com";
+    }
+
+
+
+    let u = {
+      idUser: users.length - 1,
+      name: req.name,
+      password: req.password,
+      cpf: req.cpf,
+      age: req.age,
+      phone: req.phone,
+      email: req.email,
+      address: req.address,
+      createAT: req.createAT
+    }
+
+    users.push(u)
+
+    return "Usuário criado com sucesso!";
+
+  }
+
+  //botão onclick
+  function handleRegister() {
+    console.log(
+      setUser({
+
+        name: document.getElementById("userName").value,
+        password: document.getElementById("userPassword").value,
+        cpf: document.getElementById("userCPF").value,
+        age: document.getElementById("userAge").value,
+        phone: document.getElementById("userPhone").value,
+        email: document.getElementById("userEmail").value,
+        address: document.getElementById("userAddress").value,
+        createAT: "2023-02-15"
+      })
+    )
+    listUsers(users)
+  }
+
+  function listUsers(ulist) {
+    //capturar tbody
+    //querySelector faz uma composição de palavras que diz qual elemento eu quero, encontra o id e seleciona o primeiro tbody
+    const tbody = document.querySelector("#scList tbody")
+    tbody.innerHTML = ""
+    //apaga o tbody p/ não ocorrer duplicagem
+
+    users.forEach(u => {
+      const row = document.createElement("tr")
+      row.id = u.id
+      //cria a linha
+      const nameCell = document.createElement("td")
+
+      const Buttontd = document.createElement("td")
+      const ButtontdEdit = document.createElement("td")
+      //cria a coluna
+      nameCell.textContent = u.name
+
+      const button1 = document.createElement("button")
+      const buttonEdit2 = document.createElement("button")
+
+      button1.textContent = "Deletar"
+      buttonEdit2.textContent = "Editar"
+
+      Buttontd.appendChild(button1)
+      ButtontdEdit.appendChild(buttonEdit2)
+      
+      row.appendChild(nameCell)
+      row.appendChild(Buttontd)
+      row.appendChild(ButtontdEdit)
+      
+
+      tbody.appendChild(row)
+      
+      //adiciona o row no tbody
+      //criar uma função na handle que chama a minha função, essa função recebe um id e através desse id ele deleta
+
+    })
+
+    //criar forms de filtro
+    //botão chama a função que chama a função get
+    //tem que chamar a função que retorna a lista
+
+  }
+</script>
+
+
+</html>
